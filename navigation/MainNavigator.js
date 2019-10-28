@@ -79,7 +79,7 @@ const navBarConfig = {
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
         return (
-          <Ionicons name={Platform.OS === 'android' ? "home" : "ios-home"} size={25} color={tabInfo.tintColor} />
+          <Ionicons name={Platform.OS === 'android' ? "md-home" : "ios-home"} size={25} color={tabInfo.tintColor} />
         );
       },
       tabBarColor: Colors.primaryColor,
@@ -90,7 +90,7 @@ const navBarConfig = {
     screen: CalendarNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
-        return <Ionicons name={Platform.OS === "android" ? "calendar" : "ios-calendar"} size={25} color={tabInfo.tintColor} />;
+        return <Ionicons name={Platform.OS === "android" ? "md-calendar" : "ios-calendar"} size={25} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
       tabBarLabel: "カレンダー",
@@ -100,7 +100,7 @@ const navBarConfig = {
     screen: BestCouplesNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
-        return <Ionicons name={Platform.OS === "android" ? "heart-empty" : "ios-heart-empty"} size={25} color={tabInfo.tintColor} />;
+        return <Ionicons name={Platform.OS === "android" ? "md-heart-empty" : "ios-heart-empty"} size={25} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
       tabBarLabel: "ベストカップル",
@@ -110,7 +110,7 @@ const navBarConfig = {
     screen: ShopDrawer,
     navigationOptions: {
       tabBarIcon: tabInfo => {
-        return <Ionicons name={Platform.OS === "android" ? "restaurant" : "ios-restaurant"} size={25} color={tabInfo.tintColor} />;
+        return <Ionicons name={Platform.OS === "android" ? "md-restaurant" : "ios-restaurant"} size={25} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
       tabBarLabel: "お店",
@@ -120,7 +120,7 @@ const navBarConfig = {
     screen: GuideNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
-        return <Ionicons name={Platform.OS === "android" ? "paper-plane" : "ios-paper-plane"} size={25} color={tabInfo.tintColor} />;
+        return <Ionicons name={Platform.OS === "android" ? "md-paper-plane" : "ios-paper-plane"} size={25} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
       tabBarLabel: "指南書",
