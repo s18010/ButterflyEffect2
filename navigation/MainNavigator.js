@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -27,24 +28,24 @@ const HomeNavigator = createStackNavigator({
   QRReader: QRReaderScreen,
 }, {
   defaultNavigationOptions: defaultStackNavOptions
-},);
+});
 
 const CalendarNavigator = createStackNavigator({
   Calendar: CalendarScreen,
 }, {
   defaultNavigationOptions: defaultStackNavOptions
-},);
+});
 
 const BestCouplesNavigator = createStackNavigator({
   BestCouples: BestCouplesScreen,
 }, {
   defaultNavigationOptions: defaultStackNavOptions
-},);
+});
 
 const RestaurantNavigator = createStackNavigator({
   Restaurants: RestaurantScreen,
   RestaurantDetail: RestaurantDetailScreen,
-}, { 
+}, {
   navigationOptions: { drawerLabel: "レストラン" }
 },
   { defaultNavigationOptions: defaultStackNavOptions },
@@ -68,7 +69,8 @@ const ShopDrawer = createDrawerNavigator(
 const GuideNavigator = createStackNavigator({
   Guide: GuideScreen,
 }, {
-  defaultNavigationOptions: defaultStackNavOptions },
+  defaultNavigationOptions: defaultStackNavOptions
+},
 );
 
 const navBarConfig = {
@@ -77,7 +79,7 @@ const navBarConfig = {
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
         return (
-          <Ionicons name="ios-home" size={25} color={tabInfo.tintColor} />
+          <Ionicons name={Platform.OS === 'android' ? "home" : "ios-home"} size={25} color={tabInfo.tintColor} />
         );
       },
       tabBarColor: Colors.primaryColor,
@@ -88,7 +90,7 @@ const navBarConfig = {
     screen: CalendarNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
-        return <Ionicons name="ios-calendar" size={25} color={tabInfo.tintColor} />;
+        return <Ionicons name={Platform.OS === "android" ? "calendar" : "ios-calendar"} size={25} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
       tabBarLabel: "カレンダー",
@@ -98,7 +100,7 @@ const navBarConfig = {
     screen: BestCouplesNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
-        return <Ionicons name="ios-heart-empty" size={25} color={tabInfo.tintColor} />;
+        return <Ionicons name={Platform.OS === "android" ? "heart-empty" : "ios-heart-empty"} size={25} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
       tabBarLabel: "ベストカップル",
@@ -108,7 +110,7 @@ const navBarConfig = {
     screen: ShopDrawer,
     navigationOptions: {
       tabBarIcon: tabInfo => {
-        return <Ionicons name="ios-restaurant" size={25} color={tabInfo.tintColor} />;
+        return <Ionicons name={Platform.OS === "android" ? "restaurant" : "ios-restaurant"} size={25} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
       tabBarLabel: "お店",
@@ -118,7 +120,7 @@ const navBarConfig = {
     screen: GuideNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
-        return <Ionicons name="ios-paper-plane" size={25} color={tabInfo.tintColor} />;
+        return <Ionicons name={Platform.OS === "android" ? "paper-plane" : "ios-paper-plane"} size={25} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
       tabBarLabel: "指南書",
