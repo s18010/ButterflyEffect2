@@ -1,17 +1,17 @@
 import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
-import RestaurantItem from "./RestaurantItem";
+import Card from "./Card";
 
 
 export default (props) => {
   const renderRestItem = (itemData) => {
     return (
-      <RestaurantItem
-        title={itemData.item.title}
-        image={itemData.item.imageUrl}
-        duration={itemData.item.duration}
-        complexity={itemData.item.complexity}
-        affordability={itemData.item.affordability}
+      <Card
+        name={itemData.item.name}
+        imageUrl={itemData.item.imageUrl}
+        tel={itemData.item.tel}
+        address={itemData.item.address}
+        price={itemData.item.price}
         onSelectItem={() => {
           props.navigation.navigate({
             routeName: 'RestaurantDetail',

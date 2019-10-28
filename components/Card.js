@@ -7,16 +7,16 @@ export default (props) => {
       <TouchableOpacity onPress={props.onSelectItem}>
         <View>
           <View style={{ ...styles.row, ...styles.header }}>
-            <ImageBackground source={{ uri: props.image }} style={styles.bgImage}>
+            <ImageBackground source={{ uri: props.imageUrl }} style={styles.bgImage}>
               <View style={styles.titleContainer}>
-                <Text style={styles.title} numberOfLines={1}>{props.title}</Text>
+                <Text style={styles.title} numberOfLines={1}>{props.name}</Text>
               </View>
             </ImageBackground>
           </View>
           <View style={{ ...styles.row, ...styles.detail }}>
-            <Text>{props.duration}minutes</Text>
-            <Text>{props.complexity.toUpperCase()}</Text>
-            <Text>{props.affordability.toUpperCase()}</Text>
+            <Text>{props.name}</Text>
+            <Text>{props.address}</Text>
+            <Text>{props.price}</Text>
           </View>
         </View>
       </TouchableOpacity>

@@ -6,6 +6,7 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import HomeScreen from '../screens/HomeScreen';
+import QRReaderScreen from '../screens/QRReaderScreen';
 import CalendarScreen from '../screens/CalendarScreen';
 import BestCouplesScreen from '../screens/BestCouplesScreen';
 import RestaurantScreen from '../screens/RestaurantScreen';
@@ -23,16 +24,27 @@ const defaultStackNavOptions = {
 
 const HomeNavigator = createStackNavigator({
   Home: HomeScreen,
+  QRReader: QRReaderScreen,
 }, {
-  // initialRouteName: 'MealDetail'  // setting the initial page
   defaultNavigationOptions: defaultStackNavOptions
-},
-);
+},);
+
+const CalendarNavigator = createStackNavigator({
+  Calendar: CalendarScreen,
+}, {
+  defaultNavigationOptions: defaultStackNavOptions
+},);
+
+const BestCouplesNavigator = createStackNavigator({
+  BestCouples: BestCouplesScreen,
+}, {
+  defaultNavigationOptions: defaultStackNavOptions
+},);
 
 const RestaurantNavigator = createStackNavigator({
   Restaurants: RestaurantScreen,
   RestaurantDetail: RestaurantDetailScreen,
-}, {
+}, { 
   navigationOptions: { drawerLabel: "レストラン" }
 },
   { defaultNavigationOptions: defaultStackNavOptions },
@@ -56,8 +68,7 @@ const ShopDrawer = createDrawerNavigator(
 const GuideNavigator = createStackNavigator({
   Guide: GuideScreen,
 }, {
-  defaultNavigationOptions: defaultStackNavOptions
-},
+  defaultNavigationOptions: defaultStackNavOptions },
 );
 
 const navBarConfig = {
@@ -74,7 +85,7 @@ const navBarConfig = {
     }
   },
   Calendar: {
-    screen: CalendarScreen,
+    screen: CalendarNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return <Ionicons name="ios-calendar" size={25} color={tabInfo.tintColor} />;
@@ -84,7 +95,7 @@ const navBarConfig = {
     }
   },
   BestCouples: {
-    screen: BestCouplesScreen,
+    screen: BestCouplesNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return <Ionicons name="ios-heart-empty" size={25} color={tabInfo.tintColor} />;
@@ -104,7 +115,7 @@ const navBarConfig = {
     }
   },
   Guide: {
-    screen: GuideScreen,
+    screen: GuideNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return <Ionicons name="ios-paper-plane" size={25} color={tabInfo.tintColor} />;

@@ -1,15 +1,15 @@
 import React from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import Colors from '../constants/Colors';
-import RestaurantList from '../components/RestaurantList';
+import CardList from '../components/CardList';
 import CustomHeaderButton from '../components/CustomHeaderButton';
-import { MEALS } from '../data/dummy-data'; // dummy data
+import { RESTAURANTS } from '../data/restaurant-data'; 
 
 
 const RestaurantScreen = (props) => {
   return (
-    <RestaurantList
-      listData={MEALS}
+    <CardList
+      listData={RESTAURANTS}
       navigation={props.navigation}
     />
   );
@@ -19,6 +19,7 @@ RestaurantScreen.navigationOptions = (navData) => {
   return {
     headerTitle: "レストラン",
     headerStyle: { backgroundColor: Colors.primaryColor },
+    headerTintColor: "#fff",
     headerLeft: (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton} >
         <Item

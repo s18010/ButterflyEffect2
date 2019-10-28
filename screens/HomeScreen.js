@@ -1,9 +1,62 @@
-import React from 'react';
-import { Text, StyleSheet, } from 'react-native';
+import React, { useState } from 'react';
+import { ImageBackground, View, Text, StyleSheet, Button } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
+
 
 const HomeScreen = (props) => {
+  const [data, setData] = useState('');
+  const [selectedImage, setSelectedImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7EjvkRoy42l1dFnZNFb17qOmd8WGpuOiJn2xUjigouLoez_cTMQ&s");
+
+
+  const moveToQRScreenHandler = () => {
+    props.navigation.navigate('QRReader');
+  }
+
+  const getPermissions = async () => {
+    const results = await Promise.all([
+      Permissions.askAsync(Permissions.CAMERA_ROLL),
+      Permissions.askAsync(Permissions.CAMERA)
+    ]);
+    if (results.some(({ status }) => status !== 'granted')) {
+      Alert.alert(
+        "ButterflyEffect Would Like to Access the Camera", [{ text: "OKAY" }]
+      );
+      return false;
+    }
+    return true;
+  };
+
+  const takeImageHandler = async () => {
+    const hasPermission = await getPermissions();
+    if (!hasPermission) {
+      return;
+    }
+    const image = await ImagePicker.launchCameraAsync({
+      quality: 0.5,
+    });
+
+    setSelectedImage(image.uri);
+  };
+
   return (
-    <Text>Home Screen</Text>
+    <ImageBackground
+      source={{ uri: selectedImage }}
+      style={{ width: '100%', height: '100%' }}
+    >
+      <View style={styles.points}>
+        <Text style={styles.points}>1234p</Text>
+      </View>
+
+      <Button
+        title="Scan QRcode"
+        onPress={moveToQRScreenHandler}
+      />
+      <Button
+        title="select Background Image"
+        onPress={takeImageHandler}
+      />
+    </ImageBackground >
   );
 };
 
@@ -12,5 +65,7 @@ HomeScreen.navigationOptions = () => {
     headerTitle: "ホーム",
   };
 };
+
+const styles = StyleSheet.create({});
 
 export default HomeScreen;
