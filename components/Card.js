@@ -16,7 +16,7 @@ export default (props) => {
           <View style={{ ...styles.row, ...styles.detail }}>
             <Text>{props.name}</Text>
             <Text>{props.address}</Text>
-            <Text>{props.price}</Text>
+            <Text>{props.budget}</Text>
           </View>
         </View>
       </TouchableOpacity>

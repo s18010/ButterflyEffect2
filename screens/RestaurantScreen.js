@@ -1,9 +1,10 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import Colors from '../constants/Colors';
 import CardList from '../components/CardList';
 import CustomHeaderButton from '../components/CustomHeaderButton';
-import { RESTAURANTS } from '../data/restaurant-data'; 
+import { RESTAURANTS } from '../data/restaurant-data';
 
 
 const RestaurantScreen = (props) => {
@@ -24,7 +25,7 @@ RestaurantScreen.navigationOptions = (navData) => {
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton} >
         <Item
           title="Menu"
-          iconName="ios-menu"
+          iconName={Platform.OS === 'android' ? "md-menu" : "ios-menu"}
           onPress={() => {
             navData.navigation.toggleDrawer();
           }} />

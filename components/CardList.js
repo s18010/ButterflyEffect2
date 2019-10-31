@@ -9,9 +9,7 @@ export default (props) => {
       <Card
         name={itemData.item.name}
         imageUrl={itemData.item.imageUrl}
-        tel={itemData.item.tel}
         address={itemData.item.address}
-        price={itemData.item.price}
         onSelectItem={() => {
           props.navigation.navigate({
             routeName: 'RestaurantDetail',

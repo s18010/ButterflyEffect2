@@ -13,7 +13,7 @@ const ListItem = (props) => {
   )
 }
 
-const MealDetailScreen = (props) => {
+const RestaurantDetailScreen = (props) => {
   const mealId = props.navigation.getParam('mealId');
   const selectedMeal = RESTAURANTS.find(meal => meal.id === mealId);
 
@@ -24,7 +24,8 @@ const MealDetailScreen = (props) => {
         <Text>{selectedMeal.name}</Text>
         <Text>電話番号: {selectedMeal.tel}</Text>
         <Text>住所: {selectedMeal.address}</Text>
-        <Text>料金: 1泊{selectedMeal.price}円</Text>
+        <Text>料金: 1泊{selectedMeal.price}円~</Text>
+        <Text>{selectedMeal.description}</Text>
       </View>
       {/* <Text style={styles.title}>Ingredients</Text>
       {selectedMeal.ingredients.map(ingredient => (
@@ -38,7 +39,7 @@ const MealDetailScreen = (props) => {
   );
 }
 
-MealDetailScreen.navigationOptions = (navigationData) => {
+RestaurantDetailScreen.navigationOptions = (navigationData) => {
   const mealId = navigationData.navigation.getParam('mealId');
   const selectedMeal = RESTAURANTS.find(meal => meal.id === mealId);
 
@@ -81,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MealDetailScreen;
+export default RestaurantDetailScreen;

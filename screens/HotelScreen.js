@@ -1,20 +1,16 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import Colors from '../constants/Colors';
 import CardList from '../components/CardList';
 import CustomHeaderButton from '../components/CustomHeaderButton';
-import { RESTAURANTS } from '../data/restaurant-data'; // dummy data
+import { HOTELS } from '../data/hotel-data';
 
 
 const HotelScreen = (props) => {
-  // const dummy = MEALS.filter(
-  //   meal => meal.categoryIds == "c3" || meal.categoryIds == "c4"
-  // );
-  const dummy = RESTAURANTS.map(dum => dum);
-
   return (
     <CardList
-      listData={dummy}
+      listData={HOTELS}
       navigation={props.navigation}
     />
   );
@@ -29,7 +25,7 @@ HotelScreen.navigationOptions = (navData) => {
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton} >
         <Item
           title="Menu"
-          iconName="ios-menu"
+          iconName={Platform.OS === 'android' ? "md-menu" : "ios-menu"}
           onPress={() => {
             navData.navigation.toggleDrawer();
           }} />

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { ImageBackground, View, Text, StyleSheet, Button } from 'react-native';
+import { useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 
 
 const HomeScreen = (props) => {
-  const [data, setData] = useState('');
+  const scannedData = useSelector(state => state.qr.qr.data)
   const [selectedImage, setSelectedImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7EjvkRoy42l1dFnZNFb17qOmd8WGpuOiJn2xUjigouLoez_cTMQ&s");
-
 
   const moveToQRScreenHandler = () => {
     props.navigation.navigate('QRReader');
@@ -45,7 +45,7 @@ const HomeScreen = (props) => {
       style={{ width: '100%', height: '100%' }}
     >
       <View style={styles.points}>
-        <Text style={styles.points}>1234p</Text>
+        <Text style={styles.points}>{scannedData}Points</Text>
       </View>
 
       <Button

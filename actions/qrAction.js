@@ -4,3 +4,6 @@ export const updateScanData = data => (
     data: data
   }
 );
+
+
+

@@ -1,14 +1,15 @@
 const initialState = {
   qr: {
-    data: '',
-    type: ''
+    data: 10,
+    barcodeType: ''
   }
 }
 
 const qrReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_SCAN_DATA':
-      return ({ ...state }, {
+      return ({
+        ...state,
         qr: {
           data: action.data
         }

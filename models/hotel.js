@@ -1,4 +1,4 @@
-class Restaurant {
+class Hotel {
   constructor(
     id,
     name,

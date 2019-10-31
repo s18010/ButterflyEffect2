@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 
 import MainNavigator from './navigation/MainNavigator';
-import qrReducer from './reducers/qrReducer';
+import qrReducer from "./store/reducers/qrReducer";
 
 useScreens();
 

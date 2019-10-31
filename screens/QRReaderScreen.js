@@ -7,7 +7,6 @@ import { updateScanData } from '../actions/qrAction'
 
 const QRReaderScreen = (props) => {
   const [scanned, setScanned] = useState(false);
-  const [scannedData, setscannedData] = useState(null);
 
   const getPermissions = async () => {
     const results = await Promise.all([
@@ -29,9 +28,10 @@ const QRReaderScreen = (props) => {
       return;
     }
     setScanned(true);
-    setscannedData(data);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    props.navigation.navigate('Home');
   };
+
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
