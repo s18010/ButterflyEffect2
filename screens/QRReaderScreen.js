@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { Button, View, StyleSheet, Alert, Text } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as Permissions from 'expo-permissions';
-import { updateScanData } from '../actions/qrAction'
+import { MainProvider, MainContext } from '../store/MainContext';
 
 
 const QRReaderScreen = (props) => {
+  const dummyData = 490;
+  const { currentPoints, setPoints } = useContext(MainContext);
+
   const [scanned, setScanned] = useState(false);
 
   const getPermissions = async () => {
@@ -15,7 +18,7 @@ const QRReaderScreen = (props) => {
     ]);
     if (results.some(({ status }) => status !== 'granted')) {
       Alert.alert(
-        "ButterflyEffect Would Like to Access the Camera", [{ text: "OKAY" }]
+        "ButterflyEffectがカメラへのアクセス許可を求めています", [{ text: "OKAY" }]
       );
       return false;
     }
@@ -27,14 +30,24 @@ const QRReaderScreen = (props) => {
     if (!hasPermission) {
       return;
     }
-    setScanned(true);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     props.navigation.navigate('Home');
   };
 
 
+  const addPointsHandler = (data) => {
+    setPoints(currentPoints + data);
+    props.navigation.navigate("Home");
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+
+      <Button
+        title="scan dummy data"
+        onPress={() => addPointsHandler(dummyData)}
+      />
+
       <BarCodeScanner
         onBarCodeRead={scanned ? undefined : scannedQRHandler}
         style={{ height: 300, width: 300 }}

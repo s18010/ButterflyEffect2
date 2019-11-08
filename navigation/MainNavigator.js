@@ -13,6 +13,7 @@ import BestCouplesScreen from '../screens/BestCouplesScreen';
 import RestaurantScreen from '../screens/RestaurantScreen';
 import RestaurantDetailScreen from '../screens/RestaurantDetailScreen';
 import HotelScreen from '../screens/HotelScreen';
+import HotelDetailScreen from '../screens/HotelDetailScreen';
 import GuideScreen from '../screens/GuideScreen';
 
 
@@ -53,6 +54,7 @@ const RestaurantNavigator = createStackNavigator({
 
 const HotelNavigator = createStackNavigator({
   Hotels: HotelScreen,
+  HotelDetail: HotelDetailScreen,
 }, {
   navigationOptions: { drawerLabel: "宿泊" }
 },
