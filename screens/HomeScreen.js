@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Platform, ImageBackground, View, StyleSheet } from 'react-native';
-import { Button, Container, Icon, Text, Card } from 'native-base';
+import LottieView from "lottie-react-native";
+import { Button, Container, Text } from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import { MainContext } from '../store/MainContext';
@@ -8,14 +9,9 @@ import Colors from '../constants/Colors';
 
 
 const HomeScreen = (props) => {
-  const { currentPoints } = useContext(MainContext);
-
+  const { currentPoints, QRScanned } = useContext(MainContext);
   // const [selectedImage, setSelectedImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7EjvkRoy42l1dFnZNFb17qOmd8WGpuOiJn2xUjigouLoez_cTMQ&s");
   const [selectedImage, setSelectedImage] = useState("https://m.media-amazon.com/images/I/61JljT2YNmL._SS500_.jpg");
-
-  const moveToQRScreenHandler = () => {
-    props.navigation.navigate('QRReader');
-  }
 
   const getPermissions = async () => {
     const results = await Promise.all([
@@ -31,7 +27,11 @@ const HomeScreen = (props) => {
     return true;
   };
 
-  const takeImageHandler = async () => {
+  const moveToQRScreenHandler = () => {
+    props.navigation.navigate('QRReader');
+  }
+
+  const setBgImageHandler = async () => {
     const hasPermission = await getPermissions();
     if (!hasPermission) {
       return;
@@ -39,9 +39,15 @@ const HomeScreen = (props) => {
     const image = await ImagePicker.launchCameraAsync({
       quality: 0.5,
     });
-
     setSelectedImage(image.uri);
   };
+
+  useEffect(() => {
+    if (QRScanned == true) {
+      this.animation.play(0, 1200);
+    }
+  });
+
 
   return (
     <Container>
@@ -62,16 +68,26 @@ const HomeScreen = (props) => {
             onPress={moveToQRScreenHandler} >
             <Text> QRコード読み取り </Text>
           </Button>
-
-          {/* <Button
-            title="壁紙を変更"
-            onPress={takeImageHandler}
-          /> */}
         </View>
+
+        {QRScanned ? (
+          <LottieView
+            ref={animation => {
+              this.animation = animation;
+            }}
+            style={{
+              width: 400,
+              height: 400,
+              backgroundColor: 'transparent',
+            }}
+            source={require('../assets/done-button.json')}
+          />
+        ) : <Text></Text>}
+
 
         <Button info
           style={styles.changeWallpaperButton}
-          onPress={takeImageHandler} >
+          onPress={setBgImageHandler} >
           <Text>壁紙を変更</Text>
         </Button>
       </ImageBackground >

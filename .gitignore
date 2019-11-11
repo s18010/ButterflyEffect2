@@ -9,3 +9,6 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
+
+# 一旦assetsの中身全部ローカルだけに置きます
+assets/

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
@@ -14,7 +14,7 @@ import RestaurantScreen from '../screens/RestaurantScreen';
 import RestaurantDetailScreen from '../screens/RestaurantDetailScreen';
 import HotelScreen from '../screens/HotelScreen';
 import HotelDetailScreen from '../screens/HotelDetailScreen';
-import GuideScreen from '../screens/GuideScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 
 const defaultStackNavOptions = {
@@ -69,7 +69,7 @@ const ShopDrawer = createDrawerNavigator(
 );
 
 const GuideNavigator = createStackNavigator({
-  Guide: GuideScreen,
+  Guide: SettingsScreen,
 }, {
   defaultNavigationOptions: defaultStackNavOptions
 },
@@ -122,10 +122,10 @@ const navBarConfig = {
     screen: GuideNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
-        return <Ionicons name={Platform.OS === "android" ? "md-paper-plane" : "ios-paper-plane"} size={25} color={tabInfo.tintColor} />;
+        return <Ionicons name={Platform.OS === "android" ? "md-happy" : "ios-happy"} size={25} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
-      tabBarLabel: "指南書",
+      tabBarLabel: "その他",
     }
   },
 };

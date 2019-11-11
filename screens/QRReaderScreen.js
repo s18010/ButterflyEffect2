@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Button, View, StyleSheet, Alert, Text } from 'react-native';
+import { Button, View, StyleSheet, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as Permissions from 'expo-permissions';
 import { MainProvider, MainContext } from '../store/MainContext';
@@ -8,7 +8,7 @@ import { MainProvider, MainContext } from '../store/MainContext';
 const QRReaderScreen = (props) => {
   const dummyData = 490;
   const { currentPoints, setPoints } = useContext(MainContext);
-
+  const { QRScanned, setQRScanned } = useContext(MainContext);
   const [scanned, setScanned] = useState(false);
 
   const getPermissions = async () => {
@@ -34,18 +34,19 @@ const QRReaderScreen = (props) => {
     props.navigation.navigate('Home');
   };
 
-
-  const addPointsHandler = (data) => {
+  const dummyScanndQRHandler = (data) => {
     setPoints(currentPoints + data);
+    setQRScanned(true);
     props.navigation.navigate("Home");
   };
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
+
       <Button
         title="scan dummy data"
-        onPress={() => addPointsHandler(dummyData)}
+        onPress={() => dummyScanndQRHandler(dummyData)}
       />
 
       <BarCodeScanner
