@@ -15,6 +15,7 @@ import RestaurantDetailScreen from '../screens/RestaurantDetailScreen';
 import HotelScreen from '../screens/HotelScreen';
 import HotelDetailScreen from '../screens/HotelDetailScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import PointHistoryScreen from '../screens/PointHistoryScreen';
 
 
 const defaultStackNavOptions = {
@@ -61,18 +62,43 @@ const HotelNavigator = createStackNavigator({
   { defaultNavigationOptions: defaultStackNavOptions },
 );
 
+// dummy
+const LeisureNavigator = createStackNavigator({
+  Leusures: RestaurantScreen,
+  LeisureDetail: RestaurantDetailScreen,
+}, {
+  navigationOptions: { drawerLabel: "レジャー" }
+},
+  { defaultNavigationOptions: defaultStackNavOptions },
+);
+
+// dummy
+const GiftNavigator = createStackNavigator({
+  Gifts: RestaurantScreen,
+  GiftDetail: RestaurantDetailScreen,
+}, {
+  navigationOptions: { drawerLabel: "プレゼント" }
+},
+  { defaultNavigationOptions: defaultStackNavOptions },
+);
+
 const ShopDrawer = createDrawerNavigator(
   {
     Restaurants: RestaurantNavigator,
     Hotels: HotelNavigator,
+    Leisures: LeisureNavigator,
+    Gifts: GiftNavigator,
   },
 );
 
-const GuideNavigator = createStackNavigator({
-  Guide: SettingsScreen,
-}, {
-  defaultNavigationOptions: defaultStackNavOptions
-},
+const SettingsNavigator = createStackNavigator(
+  {
+    Settings: SettingsScreen,
+    PointHistory: PointHistoryScreen,
+  },
+  {
+    defaultNavigationOptions: defaultStackNavOptions
+  },
 );
 
 const navBarConfig = {
@@ -118,11 +144,11 @@ const navBarConfig = {
       tabBarLabel: "お店",
     }
   },
-  Guide: {
-    screen: GuideNavigator,
+  Settings: {
+    screen: SettingsNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
-        return <Ionicons name={Platform.OS === "android" ? "md-happy" : "ios-happy"} size={25} color={tabInfo.tintColor} />;
+        return <Ionicons name={Platform.OS === "android" ? "md-settings" : "ios-settings"} size={25} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
       tabBarLabel: "その他",

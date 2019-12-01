@@ -4,14 +4,13 @@ import LottieView from "lottie-react-native";
 import { Button, Container, Text } from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-import { MainContext } from '../store/MainContext';
+import { MainContext } from '../contexts/MainContext';
 import Colors from '../constants/Colors';
 
 
 const HomeScreen = (props) => {
-  const { currentPoints, QRScanned } = useContext(MainContext);
-  // const [selectedImage, setSelectedImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7EjvkRoy42l1dFnZNFb17qOmd8WGpuOiJn2xUjigouLoez_cTMQ&s");
-  const [selectedImage, setSelectedImage] = useState("https://m.media-amazon.com/images/I/61JljT2YNmL._SS500_.jpg");
+  const { currentPoints, QRScanned, setQRScanned, pointData } = useContext(MainContext);
+  const [selectedImage, setSelectedImage] = useState("https://d1f5hsy4d47upe.cloudfront.net/08/0851d07ca105541de11523aab327d572_t.jpeg");
 
   const getPermissions = async () => {
     const results = await Promise.all([
@@ -28,6 +27,7 @@ const HomeScreen = (props) => {
   };
 
   const moveToQRScreenHandler = () => {
+    setQRScanned(false);
     props.navigation.navigate('QRReader');
   }
 
@@ -48,11 +48,11 @@ const HomeScreen = (props) => {
     }
   });
 
-
   return (
     <Container>
       <ImageBackground
-        source={{ uri: selectedImage }}
+        // source={{ uri: selectedImage }}
+        source={require("../assets/home.jpg")}
         style={{ width: '100%', height: '100%' }}>
 
         <View style={styles.topContainer}>
@@ -61,11 +61,16 @@ const HomeScreen = (props) => {
             <Text style={styles.points}>{currentPoints}
               <Text style={styles.pointText}>Points</Text>
             </Text>
+            {/* keyがないwarningがでるから一旦コメントアウト */}
+            {/* {pointData.map(data =>
+              (<Text>{data.name}</Text>)
+            )} */}
           </View>
 
           <Button info small
             style={styles.qrButton}
             onPress={moveToQRScreenHandler} >
+            {/* onPress={setBgImageHandler} > */}
             <Text> QRコード読み取り </Text>
           </Button>
         </View>
@@ -80,6 +85,7 @@ const HomeScreen = (props) => {
               height: 400,
               backgroundColor: 'transparent',
             }}
+            speed={0.8}
             source={require('../assets/done-button.json')}
           />
         ) : <Text></Text>}

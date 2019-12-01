@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet, View} from 'react-native';
 import { LocaleConfig, Agenda } from 'react-native-calendars';
+import Colors from '../constants/Colors';
 
 LocaleConfig.locales['ja'] = {
   monthNames:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
@@ -18,9 +19,10 @@ export default class CalendarScreen extends React.Component {
 
     this._default = {};
     this._default.items = {
-      '2019-11-03': [{text: '11月3日の予定1です'}],
-      '2019-11-04': [{text: '11月4日の予定です'}],
-      '2019-11-06': [{text: '11月6日の予定です'}]
+      '2019-11-07': [{text: 'WBSS決勝　井上vsドネア'}],
+      '2019-11-23': [{text: 'イルミネーションデート'}],
+      '2019-11-27': [{text: '歯列矯正'}],
+      '2019-11-30': [{text: '卒業研究発表'}],
     };
 
     this.state = {
@@ -79,7 +81,7 @@ CalendarScreen.navigationOptions = () => {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.primaryColor,
     flex: 1,
     borderRadius: 5,
     padding: 10,

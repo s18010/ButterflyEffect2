@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useScreens } from 'react-native-screens';
-import { MainProvider } from './store/MainContext';
+import { MainProvider } from './contexts/MainContext';
 import MainNavigator from './navigation/MainNavigator';
 
 useScreens();

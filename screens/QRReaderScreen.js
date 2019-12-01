@@ -1,14 +1,14 @@
 import React, { useState, useContext } from 'react';
-import { Button, View, StyleSheet, Alert } from 'react-native';
+import { Button, View, StyleSheet, Alert, Text } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as Permissions from 'expo-permissions';
-import { MainProvider, MainContext } from '../store/MainContext';
+import LottieView from "lottie-react-native";
+import { MainProvider, MainContext } from '../contexts/MainContext';
 
 
 const QRReaderScreen = (props) => {
-  const dummyData = 490;
-  const { currentPoints, setPoints } = useContext(MainContext);
-  const { QRScanned, setQRScanned } = useContext(MainContext);
+  const dummyData = 30;
+  const { currentPoints, setPoints, QRScanned, setQRScanned } = useContext(MainContext);
   const [scanned, setScanned] = useState(false);
 
   const getPermissions = async () => {
@@ -31,6 +31,7 @@ const QRReaderScreen = (props) => {
       return;
     }
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    setQRScanned(true);
     props.navigation.navigate('Home');
   };
 
@@ -42,10 +43,8 @@ const QRReaderScreen = (props) => {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-
-
       <Button
-        title="scan dummy data"
+        title="_"
         onPress={() => dummyScanndQRHandler(dummyData)}
       />
 
@@ -53,6 +52,21 @@ const QRReaderScreen = (props) => {
         onBarCodeRead={scanned ? undefined : scannedQRHandler}
         style={{ height: 300, width: 300 }}
       />
+      {/* {QRScanned ? (
+        <LottieView
+          ref={animation => {
+            this.animation = animation;
+          }}
+          style={{
+            width: 400,
+            height: 400,
+            backgroundColor: 'transparent',
+          }}
+          speed={0.8}
+          source={require('../assets/qr-code-scanner.json')}
+        />
+      ) : <Text></Text>} */}
+
     </View>
   );
 };
